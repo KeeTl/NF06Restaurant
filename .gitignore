@@ -1,3 +1,10 @@
 
 
+build/*
+
+:build/*.txt
+!build/*.cmake
+!build/Makefile
+!build/CMakeFiles/*
+
 
