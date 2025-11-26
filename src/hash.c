@@ -5,7 +5,7 @@
 hash_t strToHash(const char* str) {
 
     size_t strsze = strlen(str);
-    hash_t hash = 5381;
+    hash_t hash = 0;
     for (unsigned long i = 0; i < strsze; i++) {
         hash = ((hash << 5) - hash) + str[i]; 
         hash = hash & hash;
