@@ -136,6 +136,78 @@ NF06Restaurant/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/NF06Restaurant.dir/build.make CMakeFiles/NF06Restaurant.dir/build
 .PHONY : NF06Restaurant/fast
 
+src/ChainedLists.o: src/ChainedLists.c.o
+.PHONY : src/ChainedLists.o
+
+# target to build an object file
+src/ChainedLists.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/NF06Restaurant.dir/build.make CMakeFiles/NF06Restaurant.dir/src/ChainedLists.c.o
+.PHONY : src/ChainedLists.c.o
+
+src/ChainedLists.i: src/ChainedLists.c.i
+.PHONY : src/ChainedLists.i
+
+# target to preprocess a source file
+src/ChainedLists.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/NF06Restaurant.dir/build.make CMakeFiles/NF06Restaurant.dir/src/ChainedLists.c.i
+.PHONY : src/ChainedLists.c.i
+
+src/ChainedLists.s: src/ChainedLists.c.s
+.PHONY : src/ChainedLists.s
+
+# target to generate assembly for a file
+src/ChainedLists.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/NF06Restaurant.dir/build.make CMakeFiles/NF06Restaurant.dir/src/ChainedLists.c.s
+.PHONY : src/ChainedLists.c.s
+
+src/csvRestaurant.o: src/csvRestaurant.c.o
+.PHONY : src/csvRestaurant.o
+
+# target to build an object file
+src/csvRestaurant.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/NF06Restaurant.dir/build.make CMakeFiles/NF06Restaurant.dir/src/csvRestaurant.c.o
+.PHONY : src/csvRestaurant.c.o
+
+src/csvRestaurant.i: src/csvRestaurant.c.i
+.PHONY : src/csvRestaurant.i
+
+# target to preprocess a source file
+src/csvRestaurant.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/NF06Restaurant.dir/build.make CMakeFiles/NF06Restaurant.dir/src/csvRestaurant.c.i
+.PHONY : src/csvRestaurant.c.i
+
+src/csvRestaurant.s: src/csvRestaurant.c.s
+.PHONY : src/csvRestaurant.s
+
+# target to generate assembly for a file
+src/csvRestaurant.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/NF06Restaurant.dir/build.make CMakeFiles/NF06Restaurant.dir/src/csvRestaurant.c.s
+.PHONY : src/csvRestaurant.c.s
+
+src/hash.o: src/hash.c.o
+.PHONY : src/hash.o
+
+# target to build an object file
+src/hash.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/NF06Restaurant.dir/build.make CMakeFiles/NF06Restaurant.dir/src/hash.c.o
+.PHONY : src/hash.c.o
+
+src/hash.i: src/hash.c.i
+.PHONY : src/hash.i
+
+# target to preprocess a source file
+src/hash.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/NF06Restaurant.dir/build.make CMakeFiles/NF06Restaurant.dir/src/hash.c.i
+.PHONY : src/hash.c.i
+
+src/hash.s: src/hash.c.s
+.PHONY : src/hash.s
+
+# target to generate assembly for a file
+src/hash.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/NF06Restaurant.dir/build.make CMakeFiles/NF06Restaurant.dir/src/hash.c.s
+.PHONY : src/hash.c.s
+
 src/main.o: src/main.c.o
 .PHONY : src/main.o
 
@@ -170,6 +242,15 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... NF06Restaurant"
+	@echo "... src/ChainedLists.o"
+	@echo "... src/ChainedLists.i"
+	@echo "... src/ChainedLists.s"
+	@echo "... src/csvRestaurant.o"
+	@echo "... src/csvRestaurant.i"
+	@echo "... src/csvRestaurant.s"
+	@echo "... src/hash.o"
+	@echo "... src/hash.i"
+	@echo "... src/hash.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
