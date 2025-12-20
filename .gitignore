@@ -1,6 +1,7 @@
 
 
 build/*
+utils/
 
 :build/*.txt
 !build/*.cmake

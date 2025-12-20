@@ -1,6 +1,5 @@
 #include "csvRestaurant.h"
 #include <stdio.h>
-#include <stdlib.h>
 #include <string.h>
 
 
@@ -31,7 +30,31 @@ char** tokenSeparation(char* str, const char* separators, int maxNTokens, int* a
 
 }
 
-void readRestaurantInfo(char* filePath) {
+
+menuItem_t readMealToken(char** tokens) {
+    menuItem_t res;
+
+    if (!strcmp(tokens[0], "Entree")) res.type = ENTREE;
+    else if (!strcmp(tokens[0], "Plat")) res.type = PLAT;
+    else if (!strcmp(tokens[0], "Dessert")) res.type = DESSERT;
+    else if (!strcmp(tokens[0], "Boisson")) res.type = BOISSON;
+    else res.type = OTHER;
+
+    if (tokens[1][0] == ' ') {
+        res.name = &tokens[1][1];
+    }
+    else {
+        res.name = tokens[1];
+    }
+
+    res.price = atof(tokens[2]);
+    res.stock = atoll(tokens[3]);
+
+    return res;
+}
+
+
+void readRestaurantInfo(const char* filePath) {
     FILE* csv = fopen(filePath, "r");
 
     if (csv == NULL) {
@@ -39,19 +62,47 @@ void readRestaurantInfo(char* filePath) {
         exit(1);
     }
 
-    size_t buffSize = 200;
+    const size_t buffSize = 200;
+    const size_t nMallocRestaurants = 10;
+    size_t nRestaurants = 0;
+    restaurant_t* res = calloc(0, sizeof(restaurant_t));
+
     char buffer[buffSize];
     char * separator = ",";
     while (feof(csv) == 0) {
         fgets(buffer, buffSize, csv);
         int arrSze = 0;
-        char** tkns = tokenSeparation(buffer, separator, 5, &arrSze);
-        printf("%d | ", arrSze);
-        for (int i = 0; i < arrSze; i++) {
-            if (!strcmp(tkns[i], "")) printf("\\0");
-            printf("%s,",tkns[i]);
+        printf("%lu ", strlen(buffer));
+        
+        if (strcmp(buffer, "\0")) {
+            char** tkns = tokenSeparation(buffer, separator, 5, &arrSze);
+            switch (arrSze) {
+                case 1:
+                    
+
+                    break;
+                case 4:
+                    
+
+                default:
+                    printf("ERROR : file doesn't have a correct format !");
+                    exit(2);
+            }
         }
-        printf("\n");
-        free(tkns);
+
+        else {
+
+        }
+        
+
     }
+    fclose(csv);
+}
+
+
+int main() {
+
+    readRestaurantInfo("test.csv");
+
+    return 0;
 }

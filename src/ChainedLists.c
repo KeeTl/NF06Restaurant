@@ -1,16 +1,10 @@
 #include "ChainedLists.h"
-#include <stdio.h>
-#include <stdlib.h>
-
-#define TYPELIST int
-typedef struct chndLst {
-    TYPELIST val;
-    struct chndLst* next;
-
-} list;
 
 
-list* convertToList(TYPELIST* arr, int size) {
+
+int isEmpty(list* node) {return (node == NULL);}
+
+list* convertToList(order_t* arr, int size) {
     if (size == 0) {
         return NULL;
     }
@@ -22,9 +16,9 @@ list* convertToList(TYPELIST* arr, int size) {
     return res;
 }
 
-void add(list* trgt, TYPELIST v) {
-    if (trgt->next != NULL) {
-        add(trgt->next, v);
+void enQueue(list* trgt, order_t v) {
+    if (isEmpty(trgt->next)) {
+        enQueue(trgt->next, v);
     }
 
     else {
@@ -39,3 +33,21 @@ void add(list* trgt, TYPELIST v) {
     }
 }
 
+order_t deQueue(list* head) {
+    order_t res = head->val;
+
+    list* nxt = head->next;
+
+    if (!isEmpty(nxt)) {
+        head->val = nxt->val;
+        head->next = nxt->next;
+
+    }
+
+    else {
+        free(head);
+        head = NULL;
+    }
+    return res;
+
+}
