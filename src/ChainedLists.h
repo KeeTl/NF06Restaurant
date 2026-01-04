@@ -9,10 +9,12 @@
         order_t val;
         struct chndLst* next;
 
-    } list;
+    } list_t;
 
-    int isEmpty(list* node);
-    void enQueue(list* trgt, order_t v);
-    order_t deQueue(list* trgt);
+    int isEmpty(list_t* node);
+    list_t* createNode(order_t* v);
+    void enQueue(list_t* trgt, order_t* v);
+    order_t deQueue(list_t* trgt);
+    void printList(list_t* head);
 
 #endif

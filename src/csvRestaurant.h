@@ -6,6 +6,8 @@
     #include <stdlib.h>
     #include <string.h>
 
+    #define MAX_ITEMS_PER_RESTAURANT 15
+    #define MAX_RESTAURANTS_NUMBER 10
     typedef struct {
         enum PlateType {ENTREE,PLAT,DESSERT,BOISSON,OTHER} type;
 
@@ -18,7 +20,7 @@
     typedef struct {
         char* name;
         size_t count;
-        menuItem_t* meals;
+        menuItem_t meals[MAX_ITEMS_PER_RESTAURANT];
     } restaurant_t;
 
     typedef struct {
@@ -27,6 +29,9 @@
         double total; 
     } order_t;
 
-    void readRestaurantInfo(const char* filePath);
+    char** tokenSeparation(char* str, const char* separators, int maxNTokens, int* arrSze);
+    restaurant_t* readRestaurantInfo(const char* filePath, size_t * arrSze);
+    void printRestaurant(const restaurant_t* restaurant);
+    void printOrder(const order_t* order);
 
 #endif

@@ -4,9 +4,10 @@ cmake_minimum_required(VERSION 4.1.2)
 project(NF06Restaurant)
 
 set(SOURCES
+    src/hash.c
+    src/users.c
     src/ChainedLists.c
     src/csvRestaurant.c
-    src/hash.c
     src/main.c
 )
 
