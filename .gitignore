@@ -8,4 +8,8 @@ utils/
 !build/Makefile
 !build/CMakeFiles/*
 
+src/db.users
+src/test.csv
+src/*.exe
+
 
