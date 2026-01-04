@@ -2,6 +2,14 @@
 
 #define SIZE_BUFF_USER 10
 
+
+int getUserId(const char* username, user_database_t* db) {
+    for (int i = 0; i < db->nUsers; i++) {
+        if (!strcmp(db->users[i].username, username)) return i;
+    }
+    return -1;
+}
+
 user_database_t newUserDatabase(const char* fpath) {
     user_database_t res;
     res.fpath = (char *)malloc(sizeof(char)*(strlen(fpath) + 1));
@@ -41,8 +49,37 @@ void addUserToDatabase(user_database_t* db, const user_t* user) {
     if (fclose(file) != 0) {
         exit(1);
     }
-
 }   
+
+void modifyUserStatus(user_database_t* db, const char* username, user_status_t newStatus) {
+    if (db->state < 1) exit(1);
+    int uID = getUserId(username, db);
+    if (uID == -1) {
+        printf("User not found !");
+        return;
+    }
+    FILE* file = fopen(db->fpath, "rb+");
+    if (file == NULL) {
+        printf("ERROR ! File \"%s\" couldn't open properly!\n", db->fpath);
+        exit(1);
+    }
+
+    if (fseek(file, sizeof(user_t)*uID, SEEK_SET) != 0) {
+        fclose(file);
+        printf("Error editing the file !");
+        exit(1);
+    }
+
+    
+    db->users[uID].status = newStatus;
+    if (fwrite(&db->users[uID], sizeof(user_t), 1, file) != 1) {
+        printf("ERROR ! Writing has failed.\n");
+        fclose(file);
+        exit(1);
+    }
+
+    fclose(file);
+}
 
 void scanUsers(user_database_t* db) {
     if (db->state != 0) {
@@ -80,20 +117,21 @@ void scanUsers(user_database_t* db) {
 
 login_info_t loginUser(const char* username, hash_t password, user_database_t* db) {
     login_info_t res;
-    for (int i = 0; i < db->nUsers; i++) {
-        if (strcmp(db->users[i].username, username) == 0) {
-            if (password == db->users[i].passwd) {
+    int uID = getUserId(username, db);
+    if(uID == -1) {
+        res.loginResult = 0;
+        return res;
+    }
+    else {
+        if (password == db->users[uID].passwd) {
                 res.loginResult = 1;
-                res.user = &(db->users[i]);
+                res.user = &(db->users[uID]);
                 db->state = 2;
                 return res;
             }
             res.loginResult = -1;
             return res;
-        }
     }
-    res.loginResult = 0;
-    return res;
 }
 
 void freeUserDatabase(user_database_t* db) {

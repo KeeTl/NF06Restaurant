@@ -95,7 +95,7 @@ int main() {
 
         else if ((currentLogedUser->status == ADMIN) && !strcmp(tokens[0], "user")){
             if (ntokens < 2) {
-                printf("Missing argument ! ");
+                printf("Missing argument !\n");
             }
             else if (!strcmp(tokens[1], "new")) {
                 printf("Type user's username : ");
@@ -137,6 +137,19 @@ int main() {
 
                     addUserToDatabase(&usersdb, &newUser);
                 } 
+            }
+            else if (!strcmp(tokens[1], "edit")) {
+                if (ntokens != 5) {
+                    printf("Missing arguments !\n");
+                }
+                else if (!strcmp(tokens[2], "status")) {
+                    user_status_t newStatus = (!strcmp(tokens[4], "admin")) ? ADMIN : CLIENT;
+                    modifyUserStatus(&usersdb, tokens[3], newStatus);
+                    printf("User has new status.\n");
+                }
+                else {
+                    printf("Unrecognised argument");
+                }
             }
             else {
                 printf("Unrecognised argument !\n");
@@ -236,6 +249,11 @@ int main() {
             currentLogedUser = NULL;
             goto login;
         }
+
+        else if (!strcmp(tokens[0], "exit")) {
+            printf("Exiting...");
+            goto exiting;
+        }
         
         else {
             printf("Unknown command ! '%s'  is not recognised\n", tokens[0]);
@@ -246,8 +264,8 @@ int main() {
         
         
     }
-    freeUserDatabase(&usersdb);
-    
 
+    exiting:
+    freeUserDatabase(&usersdb);
     return 0;
 }
