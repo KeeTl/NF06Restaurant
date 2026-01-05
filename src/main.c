@@ -198,7 +198,7 @@ int main() {
                     int nPlates = 0;
                     order:
                     printf("Pick a plate (nothing = ending ordering) : ");
-                    fgets(usercommand, MAX_ITEMS_PER_RESTAURANT, stdin);
+                    fgets(usercommand, BUFFER_SIZE, stdin);
                     usercommand[strcspn(usercommand, "\r\n")] = '\0';
                     int pId = getPlateId(usercommand, &restaurants[n]);
 
@@ -209,7 +209,7 @@ int main() {
 
                         else {
                             printf("Pick a quantity : ");
-                            fgets(usercommand, MAX_ITEMS_PER_RESTAURANT, stdin);                            
+                            fgets(usercommand, BUFFER_SIZE, stdin);                            
                             usercommand[strcspn(usercommand, "\r\n")] = '\0';
                             unsigned long qty = atol(usercommand);
                             
@@ -227,7 +227,7 @@ int main() {
 
                     if (nPlates != 0) {
                         newOrder.ID = ++nOrders;
-                        printf("%llu", nOrders);
+                        //printf("%llu", nOrders);
                         if (nOrders == 1) orders = createNode(&newOrder);
                         else enQueue(orders, &newOrder);
                         //printOrder(&newOrder);

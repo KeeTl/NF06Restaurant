@@ -3,6 +3,7 @@
 #include <string.h>
 
 
+
 char** tokenSeparation(char* str, const char* separators, int maxNTokens, int* arrSze) {
     char** tokens = (char **) calloc(maxNTokens, sizeof(char *));
     
@@ -41,10 +42,10 @@ menuItem_t readMealToken(char** tokens) {
     else res.type = OTHER;
 
     if (tokens[1][0] == ' ') {
-        res.name = strdup(&tokens[1][1]);
+    res.name = strdup(&tokens[1][1]); 
     }
     else {
-        res.name = tokens[1];
+        res.name = strdup(tokens[1]);
     }
 
     res.price = atof(tokens[2]);
