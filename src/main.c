@@ -65,13 +65,13 @@ int main() {
     #pragma endregion
 
     while (usersdb.state == 2 && currentLogedUser != NULL) {
+        usrcmd:
         printf(">>");
         fgets(usercommand, BUFFER_SIZE, stdin);
-        int ntokens;        
+        int ntokens;
         usercommand[strcspn(usercommand, "\r\n")] = '\0';
+        if (!strncmp(usercommand, " ", 1) || !strncmp(usercommand, "\0", 1)) goto usrcmd;
         char** tokens = tokenSeparation(usercommand, " ", 10, &ntokens);
-        //for (int i = 0; i < ntokens; i++) printf("%s-", tokens[i]);
-    
         if (!strcmp(tokens[0], "open")) {
             if (ntokens != 2) {
                 printf("Invalid format ! Must be : \n open [filename]\n");
@@ -167,14 +167,27 @@ int main() {
             }
         }
         else if (!strcmp(tokens[0], "order")) {
-            if (ntokens != 2) {
+            if (ntokens < 2) {
                 printf("Invalid format ! Must be :\norder [restaurant name]\n");
             }
             else if (restaurants == NULL) {
                 printf("No restaurants loaded !");
             }
             else {
-                int n = getRestaurantId(tokens[1], restaurants, nRestaurants);
+                char rname[100] = "\0";
+                strcat(rname, tokens[1]);
+                if (ntokens > 2) {
+                    for (int i = 2; i < ntokens; i++) {
+                        strcat(rname, " ");
+                        strcat(rname, tokens[i]);
+                        /*
+                        printf("%s ", tokens[i]);
+                        printf("%s %s ", rname, tokens[i]);
+                        */
+                    }
+                }
+                printf("%s ", rname);
+                int n = getRestaurantId(rname, restaurants, nRestaurants);
                 if (n == -1) printf("Restaurant was not found");                
                 else {
                     order_t newOrder;
@@ -258,6 +271,7 @@ int main() {
         else {
             printf("Unknown command ! '%s'  is not recognised\n", tokens[0]);
         }
+
 
         free(tokens);
         usercommand[strcspn(usercommand, "\r\n")] = '\0';
